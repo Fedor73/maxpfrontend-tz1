@@ -1,35 +1,32 @@
-// import { LOG_IN, LOG_OUT, LOG_IN_FAILURE } from '../actions/SessionActions'
+import { LOG_IN, LOG_OUT, LOG_IN_FAILURE } from "../action/autorizationAction";
 
 const initialState = {
   user: null,
-  errorMsg: '',
-}
+  errorMsg: ""
+};
 
-export function authorization(state = initialState) {
-    return state;
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case LOG_IN:
+      return {
+        ...state,
+        user: {
+          name: action.payload.name
+        },
+        errorMsg: ""
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        user: null,
+        errorMsg: ""
+      };
+    case LOG_IN_FAILURE:
+      return {
+        ...state,
+        errorMsg: action.payload.errorMsg
+      };
+    default:
+      return state;
   }
-//   switch (action.type) {
-//     case LOG_IN:
-//       return {
-//         ...state,
-//         user: {
-//           name: action.payload.name,
-//         },
-//         errorMsg: '',
-//       }
-//     case LOG_OUT:
-//       return {
-//         ...state,
-//         user: null,
-//         errorMsg: '',
-//       }
-//     case LOG_IN_FAILURE:
-//       return {
-//         ...state,
-//         errorMsg: action.payload.errorMsg,
-//       }
-//     default:
-//       return state
-//   }
-// }
-
+};
